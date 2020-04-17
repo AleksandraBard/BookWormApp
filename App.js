@@ -6,9 +6,10 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  FlatList
+  FlatList,
 } from "react-native";
 import BookCount from "./components/BookCount";
+import CustomActionButton from "./components/CustomActionButton";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -46,35 +47,25 @@ export default class App extends React.Component {
     );
   };
 
-
-  markAsRead =(selectedBook, index) => {
-    let newList = this.state.books.filter(book => book !== selectedBook)
-    this.setState(prevState => ({
+  markAsRead = (selectedBook, index) => {
+    let newList = this.state.books.filter((book) => book !== selectedBook);
+    this.setState((prevState) => ({
       books: newList,
       readingCount: prevState.readingCount - 1,
-      readCount: prevState.readCount + 1
-    }))
-  }
+      readCount: prevState.readCount + 1,
+    }));
+  };
   renderItem = (item, index) => (
-    <View style={{height: 50, flexDirection: 'row'}}>
-    <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5}}>
-      <Text>{item}</Text>
+    <View style={{ height: 50, flexDirection: "row" }}>
+      <View style={{ flex: 1, justifyContent: "center", paddingLeft: 5 }}>
+        <Text>{item}</Text>
       </View>
-      <TouchableOpacity
-                onPress={() => this.markAsRead(item, index)}
-                style={{
-                  width: 100,
-                  height: 50,
-                  backgroundColor: "#a5deba",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={{fontWeight: 'bold', color: 'white'}}>Mark as Read</Text>
-              </TouchableOpacity>
+      <CustomActionButton onPress={() => this.markAsRead(item, index)} style={{width: 100, backgroundColor: "#a5deba"}}>
+        <Text style={{ fontWeight: "bold", color: "white" }}>Mark as Read</Text>
+      </CustomActionButton>
     </View>
-  )
-  
+  );
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -99,74 +90,31 @@ export default class App extends React.Component {
                 placeholder="Enter Book Name"
                 placeholderTextColor="grey"
               />
-              <TouchableOpacity
-                onPress={() => this.addBook(this.state.textInputData)}
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: "#a5deba",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <CustomActionButton style={{backgroundColor: "#a5deba"}} 
+                onPress={() => this.addBook(this.state.textInputData)}>
                 <Ionicons name="ios-checkmark" color="white" size={40} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this.hideAddNewBook}
-                style={{
-                  width: 50,
-                  height: 50,
-                  backgroundColor: "red",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              </CustomActionButton>
+              <CustomActionButton style={{backgroundColor: "red"}} 
+                onPress={this.hideAddNewBook}>
                 <Ionicons name="ios-close" color="white" size={40} />
-              </TouchableOpacity>
+              </CustomActionButton>
             </View>
           )}
-          <FlatList data={this.state.books}
-            renderItem={({item}, index) => this.renderItem(item, index)}
-              keyExtractor={(item, index) => index.toString()}
-              ListEmptyComponent={
-                <View style={{marginTop: 50, alignItems: 'center'}}>
-                <Text style={{fontWeight: 'bold'}}>Not Reading Any Books...</Text>
-                </View>
-              }
-            />
-          <TouchableOpacity
-            style={{ position: "absolute", bottom: 20, right: 20 }}
-          >
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: "pink",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ color: "white", fontSize: 30 }}>+</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.showAddNewBook}
-            style={{ position: "absolute", bottom: 20, right: 20 }}
-          >
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: "pink",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ color: "white", fontSize: 30 }}>+</Text>
-            </View>
-          </TouchableOpacity>
+          <FlatList
+            data={this.state.books}
+            renderItem={({ item }, index) => this.renderItem(item, index)}
+            keyExtractor={(item, index) => index.toString()}
+            ListEmptyComponent={
+              <View style={{ marginTop: 50, alignItems: "center" }}>
+                <Text style={{ fontWeight: "bold" }}>
+                  Not Reading Any Books...
+                </Text>
+              </View>
+            }
+          />
+          <CustomActionButton position="right" onPress={this.showAddNewBook} style={{backgroundColor: "pink", borderRadius: 25}}>
+            <Text style={{ color: "white", fontSize: 30 }}>+</Text>
+          </CustomActionButton>
         </View>
         <View
           style={{
