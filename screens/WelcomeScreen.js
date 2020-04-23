@@ -33,7 +33,7 @@ export default class WelcomeScreen extends React.Component {
               marginBottom: 10
             }}
             title="Login In"
-            onPress={() => this.props.navigation.navigate('HomeScreen')}
+            onPress={() => this.props.navigation.navigate('LoginScreen')}
           >
             <Text style={{color: 'white', fontWeight: '100'}}>Login In</Text>
           </CustomActionButton>

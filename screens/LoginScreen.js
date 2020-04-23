@@ -9,11 +9,11 @@ import {
   FlatList,
 } from "react-native";
 
-export default class SignUpScreen extends React.Component {
+export default class LoginScreen extends React.Component {
     render() {
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Text>SignUpScreen</Text>
+                <Text>LoginScreen</Text>
             </View>
         )
     }

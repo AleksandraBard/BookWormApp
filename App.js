@@ -11,7 +11,7 @@ import {
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import WelcomeScreen from './screens/WelcomeScreen'
 import HomeScreen from './screens/HomeScreen'
-import SignUpScreen from './screens/SignUpScreen'
+import LoginScreen from './screens/LoginScreen'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
 import { Ionicons } from "@expo/vector-icons";
@@ -29,10 +29,18 @@ const LoginStackNavigator = createStackNavigator({
       headerBackTitle: null
     }
   },
-  SignUpScreen: {
-    screen: SignUpScreen,
+  LoginScreen: {
+    screen: LoginScreen,
     navigationOptions: {}
-  }
+  } , 
+  // {
+  //   mode: 'modal',
+  //   defaultNavigationOptions: {
+  //     headerStyle : {
+  //       backgroundColor : '#777'
+  //     }
+  //   } 
+  // }
 })
 
 const AppDrawerNavigator = createDrawerNavigator({
